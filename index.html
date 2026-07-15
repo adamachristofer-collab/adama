@@ -1,11 +1,261 @@
 <!DOCTYPE html>
-<html >
+<html lang="es">
 <head>
-     
-    <title>Primer Proyecto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNTUALITY - Instituto Oxapampa</title>
+    <!-- Tailwind CSS para un diseño espectacular -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para iconos modernos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <h1>Hola sam</h1>
-    <h1>Hola Gibhut</h1>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <!-- Navegación -->
+    <nav class="bg-indigo-900 text-white shadow-lg">
+        <div class="max-wide-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="clock" class="text-emerald-400 w-8 h-8"></i>
+                <span class="text-2xl font-bold tracking-wider">PUNTUALITY</span>
+                <span class="text-xs bg-indigo-700 text-emerald-300 px-2 py-1 rounded-full font-semibold">Inst. Oxapampa</span>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="switchView('docente')" id="btn-docente" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-4 h-4"></i> Vista Docente
+                </button>
+                <button onclick="switchView('estudiante')" id="btn-estudiante" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> Vista Estudiante
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto p-6">
+
+        <!-- ================= VISTA DOCENTE ================= -->
+        <section id="vista-docente" class="space-y-6">
+            <div class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900">Panel de Control del Docente</h1>
+                    <p class="text-sm text-slate-500">Curso: Desarrollo de Sistemas | Ciclo III</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs bg-red-100 text-red-600 font-bold px-3 py-1 rounded-full animate-pulse">● EN VIVO</span>
+                    <p id="live-clock" class="text-lg font-mono font-bold text-slate-700 mt-1">12:00:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Alertas en Tiempo Real (Justificaciones de Alumnos) -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i data-lucide="alert-circle" class="text-amber-600 w-5 h-5"></i>
+                    </div>
+                    <div class="ml-3 w-full">
+                        <h3 class="text-sm font-bold text-amber-800">Notificación en tiempo real</h3>
+                        <div id="contenedor-notificaciones" class="mt-2 text-sm text-amber-700 space-y-1">
+                            <!-- Aquí caen las justificaciones simuladas de los alumnos -->
+                            <p>⚠️ <strong>Juan Pérez</strong> ha enviado una justificación de tardanza: <em>"Retraso por tráfico en la Av. San Martín."</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Asistencia -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-slate-900">Llamado de Asistencia de Hoy</h2>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
+                        <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro de Hoy
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-400 uppercase text-xs tracking-wider">
+                                <th class="p-4">Estudiante</th>
+                                <th class="p-4">Estado de Asistencia</th>
+                                <th class="p-4">Justificación Anticipada</th>
+                                <th class="p-4 text-center">Índice DPI</th>
+                                <th class="p-4 text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <!-- Alumno 1 -->
+                            <tr class="hover:bg-slate-50/80">
+                                <td class="p-4 font-semibold text-slate-900">Juan Pérez Meléndez</td>
+                                <td class="p-4">
+                                    <select class="bg-slate-100 text-slate-700 rounded p-1 font-medium border-none focus:ring-2 focus:ring-indigo-500">
+                                        <option value="asistio">Presente</option>
+                                        <option value="tarde" selected>Tardanza Justificada</option>
+                                        <option value="falta">Falta</option>
+                                    </select>
+                                </td>
+                                <td class="p-4">
+                                    <span class="inline-flex items-center gap-1.5 py-1 px-2 rounded-md text-xs font-medium bg-amber-100 text-amber-800">
+                                        <i data-lucide="info" class="w-3.5 h-3.5"></i> Tráfico (Leído)
+                                    </span>
+                                </td>
+                                <td class="p-4 text-center">
+                                    <span class="font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">95%</span>
+                                </td>
+                                <td class="p-4 text-center">
+                                    <button class="text-indigo-600 hover:text-indigo-800 font-semibold text-xs">Ver Ficha</button>
+                                </td>
+                            </tr>
+                            <!-- Alumno 2 (Alerta de Inasistencia - Intervención) -->
+                            <tr class="hover:bg-slate-50/80 bg-red-50/30">
+                                <td class="p-4 font-semibold text-slate-900 flex items-center gap-2">
+                                    María Rojas Espinoza
+                                    <span class="bg-red-100 text-red-600 text-[10px] px-2 py-0.5 rounded-full font-extrabold flex items-center gap-1">
+                                        <i data-lucide="shield-alert" class="w-3 h-3"></i> ALERTA DPI
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <select class="bg-red-100 text-red-700 rounded p-1 font-medium border-none">
+                                        <option value="asistio">Presente</option>
+                                        <option value="tarde">Tardanza</option>
+                                        <option value="falta" selected>Falta Injustificada</option>
+                                    </select>
+                                </td>
+                                <td class="p-4 text-slate-400 italic">Ninguna</td>
+                                <td class="p-4 text-center">
+                                    <span class="font-bold text-red-600 bg-red-100 px-2 py-1 rounded">65% (Crítico)</span>
+                                </td>
+                                <td class="p-4 text-center">
+                                    <button onclick="alert('Iniciando protocolo de intervención para contactar a María Rojas por inasistencias consecutivas.')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold">
+                                        Intervenir DPI
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VISTA ESTUDIANTE ================= -->
+        <section id="vista-estudiante" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h1 class="text-2xl font-bold text-slate-900">Portal del Estudiante</h1>
+                <p class="text-sm text-slate-500">Bienvenido de nuevo, <strong>Juan Pérez</strong></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Columna Izquierda: Reporte de Tardanza/Inasistencia -->
+                <div class="md:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="file-text" class="text-indigo-600"></i> Registrar Justificación Anticipada
+                    </h2>
+                    <p class="text-xs text-slate-500">¿Sabes que llegarás tarde o no podrás asistir hoy? Envía este formulario en tiempo real para que tu profesor esté enterado antes de pasar asistencia.</p>
+                    
+                    <form id="form-justificacion" onsubmit="enviarJustificacion(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Tipo de Evento</label>
+                            <select id="tipo-evento" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="Tardanza">Tardanza Anticipada</option>
+                                <option value="Inasistencia">Falta / Inasistencia Completa</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Motivo / Sustento</label>
+                            <textarea id="motivo-evento" rows="3" required placeholder="Ej: Mi transporte se averió a la altura de Chontabamba o tengo cita médica médica en EsSalud Oxapampa." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold p-3 rounded-lg transition flex justify-center items-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i> Enviar a Docente en Tiempo Real
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Columna Derecha: Estado de Estudiante y DPI -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 mb-4">Tu Estado Académico</h2>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-500">Asistencias Totales</span>
+                                <span class="font-semibold">28 / 30 días</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-500">Tardanzas registradas</span>
+                                <span class="font-semibold text-amber-600">2</span>
+                            </div>
+                            <hr class="border-slate-100">
+                            <!-- Indicador de DPI -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-sm font-bold text-slate-700">Tu Nivel de Riesgo (DPI)</span>
+                                    <span class="text-xs font-bold text-emerald-600">Estable</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-3">
+                                    <div class="bg-emerald-500 h-3 rounded-full" style="width: 95%"></div>
+                                </div>
+                                <p class="text-[10px] text-slate-400 mt-1">Si tu barra de DPI baja del 70%, se iniciará un protocolo preventivo de inasistencias.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-slate-50 p-3 rounded-xl text-center">
+                        <p class="text-xs text-slate-500 font-medium">✨ ¡Mantén tu puntualidad en el Instituto!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script de Interactividad -->
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // Reloj en vivo para simular el tiempo real
+        setInterval(() => {
+            const clock = document.getElementById('live-clock');
+            const now = new Date();
+            clock.textContent = now.toLocaleTimeString();
+        }, 1000);
+
+        // Cambio de pestañas (Docente/Estudiante)
+        function switchView(view) {
+            const vistaDocente = document.getElementById('vista-docente');
+            const vistaEstudiante = document.getElementById('vista-estudiante');
+            const btnDocente = document.getElementById('btn-docente');
+            const btnEstudiante = document.getElementById('btn-estudiante');
+
+            if (view === 'docente') {
+                vistaDocente.classList.remove('hidden');
+                vistaEstudiante.classList.add('hidden');
+                btnDocente.className = "bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition flex items-center gap-2";
+                btnEstudiante.className = "bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition flex items-center gap-2";
+            } else {
+                vistaDocente.classList.add('hidden');
+                vistaEstudiante.classList.remove('hidden');
+                btnDocente.className = "bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition flex items-center gap-2";
+                btnEstudiante.className = "bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition flex items-center gap-2";
+            }
+        }
+
+        // Simular envío de notificación en tiempo real desde el estudiante hacia el docente
+        function enviarJustificacion(event) {
+            event.preventDefault();
+            const tipo = document.getElementById('tipo-evento').value;
+            const motivo = document.getElementById('motivo-evento').value;
+
+            // Agregar la notificación a la vista del docente
+            const contenedor = document.getElementById('contenedor-notificaciones');
+            const nuevaNotificacion = document.createElement('p');
+            nuevaNotificacion.innerHTML = `⚠️ <strong>Juan Pérez</strong> ha notificado una <strong>${tipo}</strong>: <em>"${motivo}"</em>`;
+            
+            // Insertamos al principio
+            contenedor.insertBefore(nuevaNotificacion, contenedor.firstChild);
+
+            alert('¡Tu justificación anticipada ha sido enviada con éxito al docente en tiempo real!');
+            document.getElementById('form-justificacion').reset();
+            
+            // Regresamos automáticamente a la vista docente para ver el resultado
+            switchView('docente');
+        }
+    </script>
 </body>
 </html>
